@@ -71,6 +71,8 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
+import {ProductPage} from '@internal/plugin-product'
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -210,6 +212,22 @@ const websiteEntityPage = (
   </EntityLayout>
 );
 
+const productEntityPage = (
+  <EntityLayout>
+    <EntityLayout.Route path="/" title="Overview">
+      {overviewContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/product" title="Product">
+      <ProductPage />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/docs" title="Docs">
+      {techdocsContent}
+    </EntityLayout.Route>
+  </EntityLayout>
+);
+
 /**
  * NOTE: This page is designed to work on small screens such as mobile devices.
  * This is based on Material UI Grid. If breakpoints are used, each grid item must set the `xs` prop to a column size or to `true`,
@@ -237,6 +255,10 @@ const componentPage = (
 
     <EntitySwitch.Case if={isComponentType('website')}>
       {websiteEntityPage}
+    </EntitySwitch.Case>
+
+    <EntitySwitch.Case if={isComponentType('product')}>
+      {productEntityPage}
     </EntitySwitch.Case>
 
     <EntitySwitch.Case>{defaultEntityPage}</EntitySwitch.Case>

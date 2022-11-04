@@ -1,0 +1,10 @@
+#!/bin/bash
+
+docker run -d \
+	--name my-stage-db \
+	--rm \
+	-p 5455:5432 \
+	-e POSTGRES_PASSWORD=2aZH496qybAzEcsto6q8DsU \
+	-e PGDATA=/var/lib/postgresql/data/pgdata \
+	-v /Users/rennochj/code/backstage/data:/var/lib/postgresql/data \
+	postgres
